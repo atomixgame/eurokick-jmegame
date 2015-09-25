@@ -1,0 +1,26 @@
+MaterialDef StadiumBackground {
+
+    MaterialParameters {
+        Texture2D ColorMap
+        Texture2D ColorMap2
+        Color Color (Color)
+        Color Color2 (Color)
+        Float ColorThreshold
+        Float FlowSpeed:40
+        Float LightIntense:0.1
+    }
+
+    Technique {
+        VertexShader GLSL100:   Shaders/Background/BgStadium.vert
+        FragmentShader GLSL100: Shaders/Background/BgStadium.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+    }
+
+    Technique {
+    }
+
+}

@@ -1,0 +1,16 @@
+===============================================================================
+Cheats                                                               [CHEAT]
+===============================================================================
+Enter your manager's name as MAKE BELIEVE and any time during the game you can
+hit the following keys to make the following events happen:
+
++   Increase your team's funds by 100,000 pounds
+E   Takes you directly to a penalty kick shootout
+F   Gives away a foul
+G   Awards a goal to the last player to pass the ball
+1   Ends the match instantly with a 1-0 score
+2   Ends the match instantly with a 2-0 score
+3   Ends the match instantly with a 3-0 score
+4   Ends the match instantly with a 0-1 score
+5   Ends the match instantly with a 0-2 score
+6   Ends the match instantly with a 0-3 score

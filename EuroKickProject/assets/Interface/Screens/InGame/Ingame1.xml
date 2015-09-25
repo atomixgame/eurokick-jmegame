@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+    <!-- start screen -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+    <style id="ArialFont">
+        <attributes font="Interface/Fonts/Arial.fnt" />
+    </style>
+    <registerSound id="cinematichit" filename="Sounds/cinematic/cinematic hit.ogg" />
+    
+    <screen id="InGameFirstScreen" controller="football.ui.UIMainInGameScreenController">
+        <layer height="80%" width="80%" id="layer2" childLayout="center">
+            <image align="center" valign="center"filename="Interface/Screens/InGame/Images/versus2.png">
+                <effect>
+                    <!--<onStartScreen  name="playSound" sound="cinematichit" startDelay="300"/>-->
+                    <onStartScreen  name="fade" startColor="#0000" endColor="#000f" length="500" startDelay="300"/>
+                    <onStartScreen  name="imageSize" startSize="3.0" endSize="1" length="500" startDelay="300" />   
+                    <onStartScreen  name="fade" startColor="#000f" endColor="#0000" length="200" startDelay="3000"  neverStopRendering="true"/>
+                    <onStartScreen  name="imageSize" startSize="1" endSize="1.2" length="100" startDelay="3000"   neverStopRendering="true"/>   
+                </effect>
+            </image>
+        </layer>
+        <layer id="layer" backgroundColor="#0000" childLayout="vertical"><!--  backgroundImage="Interface/Images/bg/bg-soccerball.jpg"-->
+            <panel childLayout="vertical" height="20%" width="100%" align="center" backgroundColor="#00000088" >
+                <effect>
+                    <!--
+                    <onStartScreen  name="imageOverlayPulsate" startColor="#0005" endColor="#0000" filename="Interface/Images/gradient/BlueBurst.png" length="4000" neverStopRendering="true"/>
+                    -->
+                    <onStartScreen name="move" mode="in" direction="top" length="300" startDelay="0" inherit="true"/>
+                    <onEndScreen name="move" mode="out" direction="bottom" length="300" startDelay="0" inherit="true" neverStopRendering="true"/>
+                </effect>
+                <interact onClick="startMatch()"/>    
+                <panel childLayout="horizontal" height="80%" align="left" >
+                    <panel childLayout="vertical" width="15%" height="100%" align="left" >
+                        <interact onClick="startMatch()"/> 
+                        <text text="Stadium" align="center" textAlign="center" style="ArialFont" height="20%" color="#ffff"/>
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image width="75%" height="90%" filename = "Interface/Images/icons/soccer-2-icon.png">
+                                <effect>
+                                    <onHover name="imageSize" />
+                                    <onHover name="hint" hintText="Stadium construction" hintDelay="400" />
+                                </effect>
+                            </image>
+                        </panel>
+                    </panel>
+                    <panel childLayout="vertical" width="15%" height="100%" align="left" >
+                        <interact onClick="startMatch()"/> 
+                        <text text="Office" align="center" textAlign="center" style="ArialFont" height="20%" color="#ffff"/>
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image  width="75%" height="90%" filename = "Interface/Images/icons/business/school-icon.png">
+                                <effect>
+                                    <onHover name="imageSize" />
+                                </effect>
+                            </image>
+                        </panel>
+                    </panel>
+                    <panel childLayout="vertical" width="15%" height="100%" align="left" >
+                        <interact onClick="startMatch()"/> 
+                        <text text="Bussiness" align="center" textAlign="center" style="ArialFont" height="20%" color="#ffff"/>
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image  width="75%" height="90%" filename = "Interface/Images/icons/business/chart3d-icon.png">
+                                <effect>
+                                    <onHover name="imageSize" />
+                                </effect>
+                            </image>
+                        </panel>
+                    </panel>
+                    <panel childLayout="vertical" width="15%" height="100%" align="left" >
+                        <interact onClick="startMatch()"/> 
+                        <text text="Trans" align="center" textAlign="center" style="ArialFont" height="20%" color="#ffff"/>
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image  width="75%" height="90%" filename = "Interface/Images/icons/business/search-icon.png">
+                                <effect>
+                                    <onHover name="imageSize" />
+                                </effect>
+                            </image>
+                        </panel>
+                    </panel>
+                    <panel childLayout="vertical" width="15%" height="100%" align="left" >
+                        <interact onClick="startMatch()"/> 
+                        <text text="Squad" align="center" textAlign="center" style="ArialFont" height="20%" color="#ffff"/>
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image  width="75%" height="90%" filename = "Interface/Images/icons/playerIcon.png">
+                                <effect>
+                                    <onHover name="imageSize" />
+                                </effect>
+                            </image>
+                        </panel>
+                    </panel>
+                    <panel childLayout="vertical" width="15%" height="100%" align="left" >
+                        <interact onClick="startMatch()"/> 
+                        <text text="Shop" align="center" textAlign="center" style="ArialFont" height="20%" color="#ffff"/>
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image  width="75%" height="90%" filename = "Interface/Images/icons/business/shop-icon.png">
+                                <effect>
+                                    <onHover name="imageSize" />
+                                </effect>
+                            </image>
+                        </panel>
+                    </panel>
+                    <panel childLayout="vertical" width="15%" height="100%" align="left" >
+                        <interact onClick="startMatch()"/> 
+                        <text text="Data" align="center" textAlign="center" style="ArialFont" height="20%" color="#ffff"/>
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image  width="75%" height="90%" filename = "Interface/Images/icons/business/reports-icon.png">
+                                <effect>
+                                    <onHover name="imageSize" />
+                                </effect>
+                            </image>
+                        </panel>
+                    </panel>
+                </panel>
+            </panel>
+            <panel childLayout="center" width="100%" height="70%" align="left" >
+                <effect>
+                    <onStartScreen name="move" mode="in" direction="left" length="300" startDelay="0" inherit="true"/>
+                    <onEndScreen name="move" mode="out" direction="right" length="300" startDelay="0" inherit="true" neverStopRendering="true"/>
+                </effect>
+                <panel childLayout="center" height="30%" width="50%" align="left" valign="top" >
+                    <image  width="100%" height="100%" filename = "Interface/Images/icons/talkBubbleBlue.png"/>
+                    <text id="talkText" text="Hello guys..." align="center" textAlign="center" style="ArialFont" height="80%" color="#000f"/>
+                    <image  width="15%" height="25%" filename = "Interface/Images/icons/navigate/next.png" align="right" valign="bottom" >
+                        <interact onClick="nextLine()"/> 
+                        <effect>
+                            <onHover name="imageSize" endSize="1.2"/>
+                            <onHover name="hint" hintText="Next to read" hintDelay="400" />
+                                
+                        </effect>
+                    </image>
+                </panel>
+                <panel childLayout="center" height="70%" width="60%" align="left" valign="bottom">
+                    <image  width="45%" height="100%" filename = "Interface/Images/Characters/Businessman-Characters_idea.png"/>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+
+
+
+</nifty>

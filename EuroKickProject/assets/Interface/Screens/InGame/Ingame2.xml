@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nifty xmlns="http://nifty-gui.sourceforge.net/nifty-1.3.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nifty-gui.sourceforge.net/nifty-1.3.xsd http://nifty-gui.sourceforge.net/nifty-1.3.xsd">
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+    <!-- start screen -->
+    <!-- +++++++++++++++++++++++++++++++++++++++ -->
+    <useStyles filename="nifty-default-styles.xml" />
+    <useControls filename="nifty-default-controls.xml" />
+    <style id="ArialFont">
+        <attributes font="Interface/Fonts/Arial.fnt" />
+    </style>
+    <registerSound id="cinematichit" filename="Sounds/cinematic/cinematic hit.ogg" />
+    
+    <screen id="InGameScreen" controller="football.ui.UIIngameScreenController">
+        <layer height="80%" width="80%" id="layer2" childLayout="center">
+            <image align="center" valign="center" filename="Interface/Screens/InGame/Images/versus2.png" >
+                <effect>
+                    <!--<onStartScreen  name="playSound" sound="cinematichit" startDelay="300"/>-->
+                    <onStartScreen  name="fade" startColor="#0000" endColor="#000f" length="500" startDelay="300"/>
+                    <onStartScreen  name="imageSize" startSize="3.0" endSize="1" length="500" startDelay="300" />   
+                    <onStartScreen  name="fade" startColor="#000f" endColor="#0000" length="200" startDelay="3000"  neverStopRendering="true"/>
+                    <onStartScreen  name="imageSize" startSize="1" endSize="1.2" length="100" startDelay="3000"   neverStopRendering="true"/>   
+                </effect>
+            </image>
+        </layer>
+        <layer id="layer" backgroundColor="#0000" childLayout="vertical">
+            <panel childLayout="vertical" height="30%" width="100%" align="center">
+            </panel>  
+            <panel childLayout="vertical" height="40%" width="100%" align="center" backgroundColor="#00000044" >
+                <effect>
+                    <onStartScreen name="move" mode="in" direction="top" length="300" startDelay="0" inherit="true"/>
+                    <onEndScreen name="move" mode="out" direction="bottom" length="300" startDelay="0" inherit="true" neverStopRendering="true"/>
+                </effect>
+                <interact onClick="startMatch()"/>    
+                <text text="Match" style="ArialFont" height="20%" color="#000f" align="center" textAlign="center"/>
+                <panel childLayout="horizontal" height="80%" align="left" >
+                    <panel childLayout="vertical" width="50%" height="100%" align="left" >
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image id="clubA_Logo" width="75%" height="90%" filename = "Textures/clubs/premier/logos/arsenal-logo.png"/>
+                        </panel>
+                        <text id="clubA_Name" text="Arsenal FC" align="center" textAlign="center" style="ArialFont" height="20%" color="#000f"/>
+                    </panel>
+                    <panel childLayout="vertical" width="50%" height="100%" align="left" >
+                        <panel childLayout="center" height="80%" width="50%" align="center" >
+                            <image id="clubB_Logo" width="75%" height="90%" filename = "Textures/clubs/premier/logos/manchester-united-logo.png"/>
+                        </panel>
+                        <text id="clubB_Name" text="Manchester United FC" align="center" textAlign="center" style="ArialFont" height="20%" color="#000f"/>
+                    </panel>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+    
+    <screen id="GoalScreen" controller="football.ui.UIIngameScreenController">
+        <layer height="80%" width="80%" id="layer2" childLayout="center">
+            <image align="center" valign="bottom" filename="Interface/Images/icons/Goal icon_shaddow.png" >
+                <effect>
+                    <onStartScreen  name="fade" startColor="#0000" endColor="#000f" length="500" startDelay="100"/>
+                    <onStartScreen  name="imageSize" startSize="3.0" endSize="1.0" length="400" startDelay="100" />   
+                    <onEndScreen name="move" mode="out" direction="bottom" length="300" startDelay="0" inherit="true"/>   
+                </effect>
+            </image>
+        </layer>
+
+    </screen>
+    <screen id="MatchBreakScreen" controller="football.ui.UIIngameScreenController">
+        <layer height="80%" width="80%" id="layer2" childLayout="center">
+            <image align="center" valign="bottom" filename="Interface/Images/icons/soccer-field-3d-icon.png" >
+                <interact onClick="continueMatch()"/>
+                <effect>
+                    <onStartScreen  name="fade" startColor="#0000" endColor="#000f" length="500" startDelay="100"/>
+                    <onStartScreen  name="imageSize" startSize="3.0" endSize="1.0" length="400" startDelay="100" />   
+                    <onEndScreen name="move" mode="out" direction="bottom" length="300" startDelay="0" inherit="true"/>   
+                </effect>
+            </image>
+            <text text="Match Break! Click to Continue" style="ArialFont" height="20%" width="25%" color="#000f" align="center" textAlign="top"/>
+        </layer>
+    </screen>
+    <screen id="Stragegy" controller="football.ui.UIIngameScreenController">
+        <layer id="layer" backgroundColor="#0000" childLayout="center">
+            <panel childLayout="vertical" width="20%" align="left" >
+                <text text="Stragegy" font="Interface/Fonts/Arial.fnt" color="#000f"/>
+                <control id="myListBox" name="listBox" vertical="optional" horizontal="optional" displayItems="4" selection="Multiple" />
+            </panel>
+        </layer>
+    </screen>
+    
+    <screen id="MatchScreen" controller="football.ui.UIIngameScreenController">
+        <layer id="layer" backgroundColor="#0000" childLayout="center">
+            <panel childLayout="vertical" width="100%" align="left" >
+                <panel backgroundColor="#dd02" childLayout="horizontal" height="10%" width="100%" align="left" >
+                    <panel backgroundColor="#dd02" childLayout="horizontal" height="50%" width="30%" align="left" backgroundImage="Interface/Images/icons/scoreBar.png">
+                    <effect>
+                        <onStartScreen name="move" mode="in" direction="top" length="300" startDelay="0" inherit="true"/>
+                        <onStartScreen name="imageOverlay" post="true" alpha="#5" filename="Interface/Images/gradient/box.png" startDelay="0" inherit="true" neverStopRendering="true"/>
+                        <onEndScreen name="move" mode="out" direction="bottom" length="300" startDelay="0" inherit="true" neverStopRendering="true"/>
+                    </effect>
+                        <text id="ClubATitle" text="ARS" style="ArialFont" height="100%" width="25%" color="#000f" align="center" textAlign="center"/>
+                        <text id="Scores" text="0-0" style="ArialFont" height="100%" width="25%" color="#f00f" align="center" textAlign="center"/>
+                        <text id="ClubBTitle" text="MAN" style="ArialFont" height="100%" width="25%" color="#000f" align="center" textAlign="center"/>
+                        <text id="MatchTime" text="00:00" style="ArialFont" height="100%" width="25%" color="#000f" align="center" textAlign="center"/>
+                    </panel>
+                    
+                </panel>
+                <panel childLayout="center" height="85%" width="100%" align="center" vAlign="bottom">
+                   <panel id="Field" backgroundColor="#dd02" childLayout="absolute" height="20%" width="20%" align="center" valign="bottom"  backgroundImage="Interface/Images/icons/football-field.png">
+                    <effect>
+                        <onStartScreen name="move" mode="in" direction="top" length="300" startDelay="0" inherit="true"/>
+                        <onEndScreen name="move" mode="out" direction="bottom" length="300" startDelay="0" inherit="true" neverStopRendering="true"/>
+                    </effect>
+
+                    </panel>
+                </panel>
+                <panel backgroundColor="#0007" childLayout="horizontal" height="5%" width="100%" align="left" >
+                    <text id="CommenterTextElement" text="Hello" style="ArialFont" height="100%" width="100%" color="#ff2f" align="center" textAlign="center"/>
+                </panel>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

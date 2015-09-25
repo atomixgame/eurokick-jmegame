@@ -1,0 +1,9 @@
+Material StadiumBackgroundMat : MatDefs/Background/BgStadium.j3md {
+     MaterialParameters {
+        ColorMap2 : Flip Repeat Interface/Images/bg/bg-sky_02.jpg
+        ColorMap : Flip Repeat Interface/Images/bg/bg-field.png
+        FlowSpeed : 80.0
+     }
+    AdditionalRenderState {
+    }
+}

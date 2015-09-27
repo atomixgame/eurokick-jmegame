@@ -14,7 +14,6 @@ import com.jme3.post.FilterPostProcessor;
 import com.jme3.post.filters.DepthOfFieldFilter;
 import com.jme3.renderer.Camera;
 import com.jme3.system.AppSettings;
-import sg.games.football.managers.FootballGameStageManager;
 import sg.atom.fx.ScreenEffectManager;
 
 /**
@@ -101,16 +100,21 @@ public class FootballScreenEffectManager extends ScreenEffectManager {
     }
 
     public void simpleUpdate(float tpf) {
-        Camera cam = stageManager.getCurrentCamera();
+        Camera cam = getApp().getStageManager().getCurrentCamera();
         Vector3f origin = cam.getWorldCoordinates(new Vector2f(settings.getWidth() / 2, settings.getHeight() / 2), 0.0f);
         Vector3f direction = cam.getWorldCoordinates(new Vector2f(settings.getWidth() / 2, settings.getHeight() / 2), 0.3f);
         direction.subtractLocal(origin).normalizeLocal();
         Ray ray = new Ray(origin, direction);
         CollisionResults results = new CollisionResults();
-        int numCollisions = stageManager.getWorldManager().getWorldNode().collideWith(ray, results);
+        int numCollisions = getApp().getWorldManager().getWorldNode().collideWith(ray, results);
         if (numCollisions > 0) {
             CollisionResult hit = results.getClosestCollision();
             dofFilter.setFocusDistance(hit.getDistance() / 10.0f);
         }
+    }
+    
+        @Override
+    public FootballGame getApp() {
+        return (FootballGame) super.getApp(); //To change body of generated methods, choose Tools | Templates.
     }
 }

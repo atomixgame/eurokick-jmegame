@@ -2,6 +2,7 @@ package sg.games.football.gameplay;
 
 import sg.games.football.gameplay.managergp.GPManager;
 import java.util.ArrayList;
+import org.apache.commons.configuration.Configuration;
 import sg.atom.gameplay.GameLevel;
 import sg.atom.gameplay.GamePlayManager;
 import sg.games.football.FootballGame;
@@ -41,7 +42,7 @@ public class FootballGamePlayManager extends GamePlayManager {
     }
 
     @Override
-    public void configGamePlay() {
+    public void config(Configuration config) {
         //FIXME: Load real data of the leagues!
         createTestLeague();
     }
@@ -104,4 +105,8 @@ public class FootballGamePlayManager extends GamePlayManager {
         return league;
     }
 
+    @Override
+    public FootballGame getApp() {
+        return (FootballGame) super.getApp(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

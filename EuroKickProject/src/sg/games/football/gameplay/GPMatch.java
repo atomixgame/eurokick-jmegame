@@ -162,7 +162,7 @@ public class GPMatch extends BaseGamePlay implements PhysicsCollisionListener {
         //
         System.out.println("Goal");
         gameGUIManager.goToScreen("goal");
-        moveBall(stageManager.getWorldManager().getStadiumMaker().getCenter());
+        moveBall(getApp().getWorldManager().getStadiumMaker().getCenter());
     }
 
     public void cineShowTeamPositions() {
@@ -289,7 +289,7 @@ public class GPMatch extends BaseGamePlay implements PhysicsCollisionListener {
     public void createBall() {
 
         ballController = new SoccerBall(pitch.getPlayingArea().getCenter(), Prm.BallSize, Prm.BallMass, pitch.getWalls());
-        ballSpatial = stageManager.getWorldManager().createBall();
+        ballSpatial = getApp().getWorldManager().createBall();
         ballController.setSpatial(ballSpatial);
         getApp().getWorldManager().getPhysicsSpace().addCollisionListener(this);
 
@@ -303,7 +303,7 @@ public class GPMatch extends BaseGamePlay implements PhysicsCollisionListener {
 
         Ray ray = new Ray(origin, direction);
         CollisionResults results = new CollisionResults();
-        stageManager.getWorldManager().getStadiumMaker().getFieldNode().collideWith(ray, results);
+        getApp().getWorldManager().getStadiumMaker().getFieldNode().collideWith(ray, results);
         if (results.size() > 0) {
             CollisionResult closest = results.getClosestCollision();
             moveBall(closest.getContactPoint());

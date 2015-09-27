@@ -31,7 +31,6 @@ public class FootballGame extends AtomMain {
      * Singleton reference of Object.
      */
     private static FootballGame selfRef;
-    private FootballGamePlayManager gamePlayManager;
 
     /**
      * Constructs singleton instance of Object.
@@ -55,10 +54,10 @@ public class FootballGame extends AtomMain {
     @Override
     public void initManagers() {
         gameGUIManager = new FootballGameGUIManager(this);
-        gameGUIManager.initGUI();
         stageManager = FootballGameStageManager.getInstance();
-        stageManager.initStage();
-        worldManager = new FootballGameWorldManager(this, rootNode);
+        worldManager = new FootballGameWorldManager(this);
+        gamePlayManager = new FootballGamePlayManager(this);
+
         WorldSettings wSettings = new WorldSettings();
         wSettings.useDayLight = false;
         wSettings.useEnviroment = false;
@@ -68,8 +67,10 @@ public class FootballGame extends AtomMain {
         wSettings.useWeather = false;
         wSettings.useTerrainLOD = false;
         wSettings.usePhysics = true;
-        worldManager.initWorld(null, wSettings);
-        gamePlayManager = new FootballGamePlayManager(this);
+        gameGUIManager.initGUI();
+        stageManager.init();
+        worldManager.initLevel(null, wSettings);
+
 //        this.soundManager = new FbSoundManager((FootballGame) app);
         //this.screenEffectManager = new FootballScreenEffectManager(this);
     }
@@ -94,8 +95,9 @@ public class FootballGame extends AtomMain {
         super.simpleInitApp();
     }
 
+    @Override
     public FootballGamePlayManager getGamePlayManager() {
-        return gamePlayManager;
+        return (FootballGamePlayManager) gamePlayManager;
     }
 
     @Override

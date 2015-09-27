@@ -1,5 +1,6 @@
 package sg.games.football.managers;
 
+import com.jme3.niftygui.NiftyJmeDisplay;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.dynamic.ImageCreator;
 import de.lessvoid.nifty.controls.dynamic.LayerCreator;
@@ -35,6 +36,13 @@ public class FootballGameGUIManager extends GameGUIManager {
     @Override
     public void initGUI() {
         super.initGUI();
+        NiftyJmeDisplay jmeDisplay = new NiftyJmeDisplay(assetManager, inputManager, audioRenderer, guiViewPort);
+
+        nifty = jmeDisplay.getNifty();
+        setupCommonScreens();
+
+        getApp().getGuiViewPort().addProcessor(jmeDisplay);
+
         setupCommonScreens();
     }
 
@@ -121,4 +129,9 @@ public class FootballGameGUIManager extends GameGUIManager {
 //    public <T extends Controller> T getQuickUIController(String elementId, Class<T> clazz) {
 //        return nifty.getCurrentScreen().findControl(elementId, clazz);
 //    }
+
+    @Override
+    public FootballGame getApp() {
+        return (FootballGame) super.getApp(); //To change body of generated methods, choose Tools | Templates.
+    }
 }

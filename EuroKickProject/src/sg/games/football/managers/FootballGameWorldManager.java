@@ -15,10 +15,10 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.shadow.PssmShadowRenderer;
+import org.apache.commons.configuration.Configuration;
 import sg.games.football.FootballGame;
 import sg.atom.gameplay.GameLevel;
 import sg.atom.world.WorldManager;
@@ -37,8 +37,8 @@ public class FootballGameWorldManager extends WorldManager {
     boolean toogleTerrain = false;
     boolean toogleShaddow = false;
 
-    public FootballGameWorldManager(FootballGame app, Node rootNode) {
-        super(app, rootNode);
+    public FootballGameWorldManager(FootballGame app) {
+        super(app);
     }
 
     public Spatial createBall() {
@@ -62,8 +62,8 @@ public class FootballGameWorldManager extends WorldManager {
     }
 
     @Override
-    public void initWorld(GameLevel level, WorldSettings worldSettings) {
-        super.initWorld(level, worldSettings);
+    public void initLevel(GameLevel level, WorldSettings worldSettings) {
+        super.initLevel(level, worldSettings);
         stadiumMaker = new StadiumMaker(rootNode, assetManager);
 
     }
@@ -74,8 +74,8 @@ public class FootballGameWorldManager extends WorldManager {
     }
 
     @Override
-    public void configWorld() {
-        super.configWorld();
+    public void config(Configuration config) {
+        super.config(config);
         stadiumMaker.configStadium();
         setupKeys();
     }
@@ -93,10 +93,10 @@ public class FootballGameWorldManager extends WorldManager {
     }
 
     void setupKeys() {
-        stageManager.getInputManager().addMapping("ToogleTerrain", new KeyTrigger(KeyInput.KEY_F6));
-        stageManager.getInputManager().addListener(actionListener, "ToogleTerrain");
-        stageManager.getInputManager().addMapping("ToogleShaddow", new KeyTrigger(KeyInput.KEY_F9));
-        stageManager.getInputManager().addListener(actionListener, "ToogleShaddow");
+        getApp().getInputManager().addMapping("ToogleTerrain", new KeyTrigger(KeyInput.KEY_F6));
+        getApp().getInputManager().addListener(actionListener, "ToogleTerrain");
+        getApp().getInputManager().addMapping("ToogleShaddow", new KeyTrigger(KeyInput.KEY_F9));
+        getApp().getInputManager().addListener(actionListener, "ToogleShaddow");
     }
     private ActionListener actionListener = new ActionListener() {
         public void onAction(String name, boolean pressed, float tpf) {
@@ -145,7 +145,7 @@ public class FootballGameWorldManager extends WorldManager {
          */
         pssm = new PssmShadowRenderer(assetManager, 1024, 3);
         pssm.setDirection(new Vector3f(-0.8f, -0.7f, 0).normalizeLocal());
-        ViewPort viewPort = stageManager.getCurrentActiveViewPort();
+        ViewPort viewPort = getApp().getViewPort();
         viewPort.addProcessor(pssm);
 
     }
@@ -156,5 +156,10 @@ public class FootballGameWorldManager extends WorldManager {
 
     public StadiumMaker getStadiumMaker() {
         return stadiumMaker;
+    }
+
+    @Override
+    public FootballGame getApp() {
+        return (FootballGame) super.getApp(); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,14 +1,5 @@
 package sg.games.football.managers;
 
-import com.jme3.asset.AssetManager;
-import com.jme3.audio.AudioNode;
-import com.jme3.audio.AudioRenderer;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import sg.atom.stage.sound.SoundClip;
-import sg.games.football.FootballGame;
-import sg.games.football.stage.sound.SoundClips;
-
 public class FootballSoundManager {
 
 //    private EnumMap<SoundClips, AudioNode> soundMap;

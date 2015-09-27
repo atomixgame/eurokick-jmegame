@@ -2,15 +2,14 @@ package sg.games.football.entities;
 
 import com.jme3.math.Transform;
 import com.jme3.math.Vector3f;
-import sg.games.football.managers.FootballGameStageManager;
-import sg.games.football.gameplay.FootballGamePlayManager;
 import sg.games.football.gameplay.SoccerPitch;
 import sg.games.football.geom.Vector2D;
 import java.util.ArrayList;
 import java.util.Iterator;
+import sg.atom.core.AtomMain;
 import sg.atom.entity.Entity;
 import sg.atom.entity.EntityManager;
-import sg.atom.stage.StageManager;
+import sg.games.football.FootballGame;
 
 /**
  *
@@ -26,8 +25,8 @@ public class FootballEntityManager extends EntityManager {
     /**
      * Constructs singleton instance of Object.
      */
-    private FootballEntityManager(StageManager stageManager) {
-        super(stageManager);
+    private FootballEntityManager(AtomMain app) {
+        super(app);
         selfRef = this;
     }
 
@@ -38,7 +37,7 @@ public class FootballEntityManager extends EntityManager {
      */
     public static final FootballEntityManager getInstance() {
         if (selfRef == null) {
-            selfRef = new FootballEntityManager(FootballGameStageManager.getInstance());
+            selfRef = new FootballEntityManager(FootballGame.getInstance());
         }
         return selfRef;
     }
@@ -89,24 +88,21 @@ public class FootballEntityManager extends EntityManager {
      *shortcut getter setter
      */
 
-    public FootballGameStageManager getStageManager() {
-        return (FootballGameStageManager) stageManager;
-    }
-
-    public FootballGamePlayManager getGamePlayManager() {
-        return this.getStageManager().getGamePlayManager();
-    }
-
     public Transform getDefaultTransform(Vector2D pos2D, Vector2D heading) {
         Transform t = new Transform();
-        SoccerPitch pitch = getGamePlayManager().getMatchGamePlay().getPitch();
+        SoccerPitch pitch = getApp().getGamePlayManager().getMatchGamePlay().getPitch();
         t.setTranslation(pitch.vec2DToVec3D(pos2D));
         return t;
 
     }
 
     public Vector3f getDefaultTranslation(Vector2D pos2D) {
-        return getGamePlayManager().getMatchGamePlay().getPitch().vec2DToVec3D(pos2D);
+        return getApp().getGamePlayManager().getMatchGamePlay().getPitch().vec2DToVec3D(pos2D);
 
+    }
+
+    @Override
+    public FootballGame getApp() {
+        return (FootballGame) super.getApp(); //To change body of generated methods, choose Tools | Templates.
     }
 }

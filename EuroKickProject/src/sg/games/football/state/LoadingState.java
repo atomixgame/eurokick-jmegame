@@ -51,16 +51,9 @@ public class LoadingState extends BaseGameScreenState {
     }
 
     protected void loadPhase() {
-        stageManager.loadStage();
-        //System.out.println("Finish Loading !");
-        stageManager.configStage();
-        //System.out.println("Finish Config !");
     }
 
     protected void finishPhase() {
-        // FIXME: We don't have to attachStage at this momment!
-        //stageManager.attachStage();
-        stageManager.finishStage();
     }
 
     protected void nextState() {

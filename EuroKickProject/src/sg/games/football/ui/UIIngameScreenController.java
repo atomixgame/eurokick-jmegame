@@ -4,7 +4,6 @@
  */
 package sg.games.football.ui;
 
-import com.jme3.asset.AssetManager;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
@@ -12,27 +11,23 @@ import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.elements.render.TextRenderer;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.builder.*;
-import sg.games.football.managers.FootballGameStageManager;
 import sg.games.football.gameplay.FootballGamePlayManager;
 import sg.games.football.gameplay.GPMatch;
-import sg.games.football.gameplay.FootballStragegy;
 import java.util.List;
-import sg.atom.ui.GameGUIManager;
 import java.util.*;
 import de.lessvoid.nifty.tools.SizeValue;
+import javax.inject.Inject;
+import sg.games.football.FootballGame;
 import sg.games.football.entities.PlayerBase;
+import sg.games.football.managers.FootballGameGUIManager;
 
 /**
  *
  * @author cuong.nguyenmanh2
  */
-public class UIIngameScreenController implements ScreenController {
+public class UIIngameScreenController extends BaseScreenController {
 
-    Nifty nifty;
-    Screen screen;
-    private final GameGUIManager gameGUIManager;
     // MatchScreen
     private Element timeElement;
     private Element clubATitle, clubBTitle;
@@ -42,10 +37,10 @@ public class UIIngameScreenController implements ScreenController {
     // MiniView
     private Element miniView;
     private Element ballEl;
-    private AssetManager assetManager;
 
-    public UIIngameScreenController(GameGUIManager gameGUIManager) {
-        this.gameGUIManager = gameGUIManager;
+    @Inject
+    public UIIngameScreenController(FootballGameGUIManager gameGUIManager) {
+        super(gameGUIManager);
     }
 
     public void bind(Nifty nifty, Screen screen) {
@@ -80,7 +75,7 @@ public class UIIngameScreenController implements ScreenController {
      */
     public void fillMyListBox(Screen screen) {
         ListBox listBox = screen.findNiftyControl("myListBox", ListBox.class);
-        FootballGamePlayManager gameplayManager = FootballGameStageManager.getInstance().getGamePlayManager();
+        FootballGamePlayManager gameplayManager = FootballGame.getInstance().getGamePlayManager();
         GPMatch gameplay = gameplayManager.getMatchGamePlay();
 
 //        for (FootballStragegy st : gameplay.getCurrentPlayer().getCoach().getStragegies()) {
@@ -105,7 +100,7 @@ public class UIIngameScreenController implements ScreenController {
      * Match Screen */
 
     public GPMatch getMatchGameplay() {
-        FootballGamePlayManager gamePlayManager = (FootballGamePlayManager) gameGUIManager.getStageManager().getGamePlayManager();
+        FootballGamePlayManager gamePlayManager = gameGUIManager.getApp().getGamePlayManager();
         GPMatch gameplay = gamePlayManager.getMatchGamePlay();
         return gameplay;
     }

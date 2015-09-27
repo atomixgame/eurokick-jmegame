@@ -5,25 +5,25 @@ import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
-import de.lessvoid.nifty.screen.ScreenController;
 import sg.games.football.ui.model.EmailMessageModel;
 import java.util.List;
-import sg.atom.ui.GameGUIManager;
 import java.util.ArrayList;
+import javax.inject.Inject;
 import sg.games.football.gameplay.FootballGamePlayManager;
 import sg.games.football.gameplay.info.FootballPlayerInfo;
+import sg.games.football.managers.FootballGameGUIManager;
 
 /**
  *
  * @author cuong.nguyenmanh2
  */
-public class UIPlayerListScreenController implements ScreenController {
+public class UIPlayerListScreenController extends BaseScreenController {
 
-    private final GameGUIManager gameGUIManager;
     private ArrayList selectedList;
 
-    public UIPlayerListScreenController(GameGUIManager gameGUIManager) {
-        this.gameGUIManager = gameGUIManager;
+    @Inject
+    public UIPlayerListScreenController(FootballGameGUIManager gameGUIManager) {
+        super(gameGUIManager);
     }
 
     public void bind(Nifty nifty, Screen screen) {

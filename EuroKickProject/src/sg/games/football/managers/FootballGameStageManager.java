@@ -1,13 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package sg.games.football.managers;
 
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import sg.games.football.FootballGame;
-import sg.games.football.gameplay.FootballGamePlayManager;
 import sg.atom.stage.StageManager;
 
 /**
@@ -43,28 +38,14 @@ public class FootballGameStageManager extends StageManager {
         return selfRef;
     }
 
-    @Override
-    public void configStageCustom() {
-        getGamePlayManager().configGamePlay();
-        //this.getScreenEffectManager().init();
-    }
-
-    @Override
-    public void finishStageCustom() {
-        setupCamera();
-//        setupKeys();
-        //pauseGame();
-        //getGamePlayManager().startGamePlay();
-    }
-
     /* Custom */
     public void setupCamera() {
         getApp().getFlyByCamera().setMoveSpeed(10f);
         Camera cam = getCurrentCamera();
         cam.setLocation(new Vector3f(0, 20, 0));
-        cam.lookAt(((FootballGameWorldManager) worldManager).getStadiumMaker().getCenter(), Vector3f.UNIT_Y);
+        cam.lookAt(((FootballGameWorldManager) getApp().getWorldManager()).getStadiumMaker().getCenter(), Vector3f.UNIT_Y);
     }
-
+    
     public void showCursor(boolean show) {
         if (show) {
             getApp().getFlyByCamera().setEnabled(false);
@@ -74,34 +55,26 @@ public class FootballGameStageManager extends StageManager {
             getApp().getInputManager().setCursorVisible(false);
         }
     }
-
+    
     @Override
-    public void updateStageCustom(float tpf) {
-        getGamePlayManager().update(tpf);
-
-        //getScreenEffectManager().simpleUpdate(tpf);
-//        actionQueue.updateActionQueue(tpf);
+    public void update(float tpf) {
+        super.update(tpf);
     }
-
+    
     public void pauseGame() {
         gamePaused = true;
     }
-
+    
     public void resumeGame() {
     }
     /* Game specific Short cut */
-
-    @Override
-    public FootballGameWorldManager getWorldManager() {
-        return (FootballGameWorldManager) worldManager;
-    }
-
-    @Override
-    public FootballGamePlayManager getGamePlayManager() {
-        return (FootballGamePlayManager) gamePlayManager;
-    }
-
+    
     private FootballScreenEffectManager getScreenEffectManager() {
         return (FootballScreenEffectManager) screenEffectManager;
+    }
+    
+    @Override
+    public FootballGame getApp() {
+        return (FootballGame) super.getApp(); //To change body of generated methods, choose Tools | Templates.
     }
 }
